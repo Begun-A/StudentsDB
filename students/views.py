@@ -7,13 +7,12 @@ from django.template import loader, RequestContext
 
 # Students views
 def students_list(request):
-    st1 = {'first_name': 'Stallone', 'last_name': 'Sylvester',
-           'ticket': '2122', 'image' : 'img/stal.jpg', 'id':'1'}
-    st2 = {'first_name': 'Sagemiller', 'last_name': 'Melissa',
-           'ticket': '2123', 'image' : 'img/girl.jpg', 'id':'2'}
-    st3 = {'first_name': u'Бігун', 'last_name': u'Олександр',
-           'ticket': '2124', 'image' : 'img/com.jpg', 'id':'3'}
-    students = [st1, st2, st3]
+    students = [{'first_name': 'Stallone', 'last_name': 'Sylvester',
+                'ticket': '2122', 'image' : 'img/stal.jpg', 'id':'1'},
+                {'first_name': 'Sagemiller', 'last_name': 'Melissa',
+                'ticket': '2123', 'image' : 'img/girl.jpg', 'id':'2'},
+                {'first_name': u'Бігун', 'last_name': u'Олександр',
+                'ticket': '2124', 'image' : 'img/com.jpg', 'id':'3'}]
     context = {'students':students}
     return render(request, "students/students_list.html", context)
 
@@ -32,7 +31,11 @@ def students_delete(request, sid):
 
 # Groups views
 def groups_list(request):
-    return HttpResponse("<h1>Groups list</h1>")
+    groups = [{'id':1, 'name':'МтМ-21', 'warden':u'Sylvester Stalone'},
+              {'id':2, 'name':'МтМ-22', 'warden':u'Melissa Sagemiller'},
+              {'id':3, 'name':'МтМ-23', 'warden':u'Бігун Олександр'}]
+    context = {'groups':groups}
+    return render(request, 'students/groups.html', context)
 
 
 def groups_add(request):
