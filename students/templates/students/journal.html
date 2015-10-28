@@ -1,0 +1,45 @@
+{% extends 'students/base.html' %}
+{% block meta-title %}Відвідування{% endblock meta-title %}
+{% block title %}Облік відвідування{% endblock title %}
+
+<!--Mounts button-->
+
+{% block content %}
+<!--Start Journal List-->
+<table class="table table-hover table-striped table-bordered">
+    <caption><a>&larr;</a>Жовтень <a>&rarr;</a></caption>
+    <thead>
+    <tr>
+        <th rowspan="2">№</th>
+        <th rowspan="2">Студент</th>
+        <th>Ср <br/>1</th>
+        <th>Чт <br/>2</th>
+    </tr>
+    <tr>
+
+    </tr>
+    </thead>
+    <tbody>
+     <tr>
+         <td>1</td>
+         <td><a href="#"> Stallone Silvestr </a></td>
+         <!--Multiply using templates -->
+         <td>
+             <form method="POST" action="">
+                 <input type="checkbox">
+             </form>
+         </td>
+         <td>
+             <form method="POST" action="">
+                 <input type="checkbox">
+             </form>
+         </td>
+     </tr>
+
+
+    </tbody>
+</table>
+<!--End Journal List-->
+
+
+{% endblock content %}

@@ -5,14 +5,15 @@
 <html lang='uk'>
 <head>
     <meta charset="UTF-8"/>
-    <title>Сторінка Обліку Студентів-{% block meta-title %}{% endblock %}</title>
+    <title>Сторінка Обліку
+        Студентів-{% block meta-title %}{% endblock %}</title>
     <meta name="description"
           value="Сторінка обліку студентів навчального закладу"/>
 
     <!--Include section -->
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href={% static "css/main.css" %}>
+    <link rel="stylesheet" href={{ PORTAL_URL }}{% static "css/main.css" %}>
     {% block extra-css %}{% endblock %}
 </head>
 
@@ -22,9 +23,12 @@
     <!--Satart Header-->
     <div class="row" id="header">
         <!--Logo-->
+        {% block logo %}
         <div class="col-xs-8" id="logo"><h1>Сервіс Обліку Студентів</h1>
         </div>
+        {% endblock logo %}
         <!--Groups selector-->
+        {% block groups-selector %}
         <div class="col-xs-4" id="group-selector">
             <strong>Група:</strong>
             <select>
@@ -33,16 +37,28 @@
                 <option value="">МтМ2</option>
             </select>
         </div>
+        {% endblock groups-selector %}
     </div>
     <!--End Header-->
     <!--Start SubHeader-->
     <div class="row" id="sub-header">
         <div class="col-xs-12">
             <ul class="nav nav-tabs">
-                <li role="presentation" class="active"><a href={% url 'home' %}>Студенти</a>
+                <li role="presentation"
+                    {% url 'home' as the_url %}
+                    {% if request.path == the_url %}class="active" {% endif %}>
+                    <a href={% url 'home' %}>Студенти</a>
                 </li>
-                <li role="presentation"><a href={% url "journal_all" %}>Відвідування</a></li>
-                <li role="presentation"><a href={% url "groups_list" %}>Групи</a></li>
+                <li role="presentation"
+                    {% url 'journal_all' as the_url %}
+                    {% if request.path == the_url %}class="active" {% endif %}>
+                    <a href={% url "journal_all" %}>Відвідування</a>
+                </li>
+                <li role="presentation"
+                    {% url "groups_list" as the_url %}
+                    {% if request.path == the_url %}class="active" {% endif %}>
+                    <a href={% url "groups_list" %}>Групи</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -51,20 +67,22 @@
     <div class="row" id="content-columns">
         <div class="col-xs-12" id="content-column">
 
-    {% block alert %}{% endblock alert %}
+            {% block alert %}{% endblock alert %}
 
-    <h2>{% block title %}{% endblock title %}</h2>
-    {% block content %}
-    {% endblock content %}
+            <h2>{% block title %}{% endblock title %}</h2>
+            {% block content %}
+            {% endblock content %}
         </div>
     </div>
     <!--End Main Page Content-->
 
     <!--Start Footer-->
+{% block footer %}
     <div class="row" id="footer">
         <div class="col-xs-12">&copy; 2014 Сервіс Обліку Студентів
         </div>
     </div>
+{% endblock footer %}
     <!--End Footer-->
 
 </div>

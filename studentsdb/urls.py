@@ -15,24 +15,42 @@ Including another URLconf
 """
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
+from .settings import MEDIA_ROOT, DEBUG
 
 urlpatterns = patterns('students.views',
-    url(r'^admin/', include(admin.site.urls)),
+                       url(r'^admin/', include(admin.site.urls)),
 
-    # Students ,
-    url(r'^$', 'students_list', name='home'),
-    url(r'^students/add/$', 'students_add', name='students_add'),
-    url(r'^students/(?P<sid>\d+)/edit/$','students_edit', name='students_edit' ),
-    url(r'^students/(?P<sid>\d+)/delete/$','students_delete', name='students_delete'),
+                       # Students ,
+                       url(r'^$', 'students.students_list', name='home'),
+                       url(r'^students/add/$', 'students.students_add',
+                           name='students_add'),
+                       url(r'^students/(?P<sid>\d+)/edit/$',
+                           'students.students_edit', name='students_edit'),
+                       url(r'^students/(?P<sid>\d+)/delete/$',
+                           'students.students_delete', name='students_delete'),
 
-    # Groups URLs
-    url(r'^groups$', 'groups_list', name='groups_list'),
-    url(r'^groups/add/$', 'groups_add', name='groups_add'),
-    url(r'^groups/(?P<sid>\d+)/edit/$','groups_edit', name='groups_edit'),
-    url(r'^groups/(?P<sid>\d+)/delete/$','groups_delete', name='groups_delete'),
+                       # Groups URLs
+                       url(r'^groups$', 'groups.groups_list',
+                           name='groups_list'),
+                       url(r'^groups/add/$', 'groups.groups_add',
+                           name='groups_add'),
+                       url(r'^groups/(?P<sid>\d+)/edit/$', 'groups.groups_edit',
+                           name='groups_edit'),
+                       url(r'^groups/(?P<sid>\d+)/delete/$',
+                           'groups.groups_delete', name='groups_delete'),
 
-    # Journal URLs
-    url(r'^journal$', 'journal_all', name='journal_all'),
-    url(r'^journal/(?P<jid>\d+)$','journal_students', name='journal_students'),
-    url(r'^journal/update/$','journal_update', name='journal_update'),
-)
+                       # Journal URLs
+                       url(r'^journal$', 'journal.journal_all',
+                           name='journal_all'),
+                       url(r'^journal/(?P<jid>\d+)$',
+                           'journal.journal_students', name='journal_students'),
+                       url(r'^journal/update/$', 'journal.journal_update',
+                           name='journal_update'),
+                       )
+
+if DEBUG:
+    urlpatterns += patterns('',
+                           url(r'^media/(?P<path>.*)$',
+                               'django.views.static.serve',
+                               {'document_root': MEDIA_ROOT})
+                           )
