@@ -46,11 +46,50 @@ class Student(models.Model):
 
     ticket = models.IntegerField(
         blank=False,
-        verbose_name='№ Студенстського Білету'
+        verbose_name=u'№ Студенстського Білету'
     )
 
     notes = models.TextField(
         blank=True,
-        verbose_name='Нотатки'
+        verbose_name=u'Нотатки'
     )
 
+    student_group = models.ForeignKey('Group',
+        blank=False,
+        null= True,
+        verbose_name=u'Група',
+        on_delete=models.PROTECT
+    )
+
+class Group(models.Model):
+    """Groups Model"""
+    class Meta(object):
+        verbose_name = u'Група'
+        verbose_name_plural = u'Групи'
+
+    def __unicode__(self):
+        if self.leader:
+            return u'{0} ({1} {2})'.format(
+                self.title,
+                self.leader.first_name,
+                self.leader.last_name)
+        else:
+            return u'{0}'.format(self.title)
+
+    title = models.CharField(
+        max_length=256,
+        blank=False,
+        verbose_name=u'Назва'
+    )
+
+    leader = models.OneToOneField('Student',
+        verbose_name=u'Староста',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL
+    )
+
+    notes = models.TextField(
+        blank=True,
+        verbose_name=u'Нотатки'
+    )

@@ -1,0 +1,104 @@
+[
+{
+    "fields": {
+        "first_name": "Oleg",
+        "last_name": "Bigun",
+        "midle_name": "",
+        "photo": "./stal.jpg",
+        "notes": "",
+        "student_group": 1,
+        "birthday": "2015-10-23",
+        "ticket": 2212
+    },
+    "model": "students.student",
+    "pk": 1
+},
+{
+    "fields": {
+        "first_name": "Dima",
+        "last_name": "Liskov",
+        "midle_name": "Olex",
+        "photo": "./com.jpg",
+        "notes": "I want to write somesing smart.",
+        "student_group": null,
+        "birthday": "2015-10-19",
+        "ticket": 123
+    },
+    "model": "students.student",
+    "pk": 3
+},
+{
+    "fields": {
+        "first_name": "John",
+        "last_name": "Snow",
+        "midle_name": "Foredter",
+        "photo": "",
+        "notes": "Diar Mr. and Md. Smith!\r\n",
+        "student_group": null,
+        "birthday": "1992-10-19",
+        "ticket": 4567
+    },
+    "model": "students.student",
+    "pk": 4
+},
+{
+    "fields": {
+        "first_name": "Anna",
+        "last_name": "Ahmatova",
+        "midle_name": "Vladimirovna",
+        "photo": "",
+        "notes": "My favorite ticket.\r\n",
+        "student_group": null,
+        "birthday": "2000-06-14",
+        "ticket": 789
+    },
+    "model": "students.student",
+    "pk": 5
+},
+{
+    "fields": {
+        "first_name": "Krasnopolskaya",
+        "last_name": "Tat'yana",
+        "midle_name": "Sigizmungovna",
+        "photo": "./girl.jpg",
+        "notes": "You are a butifull students!!!",
+        "student_group": null,
+        "birthday": "1957-02-17",
+        "ticket": 8
+    },
+    "model": "students.student",
+    "pk": 6
+},
+{
+    "fields": {
+        "first_name": "Ragnar",
+        "last_name": "Viking",
+        "midle_name": "",
+        "photo": "",
+        "notes": "",
+        "student_group": null,
+        "birthday": null,
+        "ticket": 12
+    },
+    "model": "students.student",
+    "pk": 7
+},
+{
+    "fields": {
+        "notes": "",
+        "leader": 3,
+        "title": "mtm-1"
+    },
+    "model": "students.group",
+    "pk": 1
+},
+{
+    "fields": {
+        "notes": "",
+        "leader": 1,
+        "title": "mtm-2"
+    },
+    "model": "students.group",
+    "pk": 2
+}
+]

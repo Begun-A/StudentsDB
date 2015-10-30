@@ -54,7 +54,7 @@
         <tbody>
         {% for student in students %}
             <tr>
-                <td>{{ students.index }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>
                     {% if student.photo %}
                         <img src="{{ student.photo.url }}" width="40"
@@ -99,8 +99,12 @@
         {% endfor %}
 
 
+
         </tbody>
     </table>
-    {% include 'students/pagination.html' %}
+    <button type="button" data-loading-text="Loading..." class="btn btn-primary">
+      Loading state
+    </button>
+{#    {% include 'students/pagination.html' %}#}
     <!--End Student List-->
 {% endblock content %}
