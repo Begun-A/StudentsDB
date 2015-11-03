@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="" method="post" enctype="multipart/form-data" target="/" name="student_form">
+    <input type="hidden" value="27" name="student_id">
+    <div>
+        <label for="first_neme">Ім'я: </label>
+        <input type="text" name="first_name" id="first_neme">
+    </div>
+    <div>
+        <label for="graduated">Закінчили навчання?: </label>
+        <input type="checkbox" value="1" checked name="graduated" id="graduated">
+    </div>
+    <div>
+        <label for="gender">Ваша стать: </label>
+        М<input type="radio" value="male" name='gender' id="gender">
+        Ж<input type="radio" value="female" name='gender'>
+    </div>
+    <div>
+        <label>Звантажте файл:</label>
+        <input type="file">
+    </div>
+    <div>
+        <label for="age">Вкажіть свій вік: </label>
+        <select name="age" id="age">
+            <option value="10">Більше 10</option>
+            <option value="20">Більше 20</option>
+            <option value="30">Більше 30</option>
+        </select>
+    </div>
+    <div>
+        <textarea name="notes" id="notes" placeholder="..."></textarea>
+    </div>
+</form>
+</body>
+</html>

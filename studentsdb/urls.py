@@ -46,11 +46,18 @@ urlpatterns = patterns('students.views',
                            'journal.journal_students', name='journal_students'),
                        url(r'^journal/update/$', 'journal.journal_update',
                            name='journal_update'),
+
+                       # Exam URLs
+                       url(r'^exams$', 'exams.exams_list', name='exam_list'),
+
+                       # Resalts URLs
+                       url(r'^resalts$', 'resalts.resalts_list',
+                           name='resalts_list')
                        )
 
 if DEBUG:
     urlpatterns += patterns('',
-                           url(r'^media/(?P<path>.*)$',
-                               'django.views.static.serve',
-                               {'document_root': MEDIA_ROOT})
-                           )
+                            url(r'^media/(?P<path>.*)$',
+                                'django.views.static.serve',
+                                {'document_root': MEDIA_ROOT})
+                            )

@@ -34,3 +34,6 @@ caption{
     font: 16pt bold;
     color: black;
 }
+input, textarea, select{
+    max-width: 300px;
+}
