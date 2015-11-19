@@ -49,15 +49,15 @@ class Student(models.Model):
         verbose_name=u'№ Студенстського Білету'
     )
 
-    notes = models.TextField(
-        blank=True,
-        verbose_name=u'Нотатки'
-    )
-
     student_group = models.ForeignKey('Group',
         blank=False,
         null= True,
         verbose_name=u'Група',
         on_delete=models.PROTECT
+    )
+
+    notes = models.TextField(
+        blank=True,
+        verbose_name=u'Нотатки'
     )
 

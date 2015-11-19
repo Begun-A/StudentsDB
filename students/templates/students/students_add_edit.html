@@ -1,0 +1,28 @@
+{% extends "students/base.html" %}
+{% load static from staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block meta_title %}{{ meta_title }}{% endblock meta_title %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block status_message %}
+{% if form.errors %}
+<div class="alert alert-warning" role="alert">Будь-ласка, виправте н\
+аступні помилки</div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% crispy form %}
+{#<form class="form-horizontal" action="{% url "students_edit" student.id %}" method="post"#}
+{#      enctype="multipart/form-data" name="students_form">{% csrf_token %}#}
+{#    <div class="form-group">#}
+{#        <label class="col-sm-2 control-label"></label>#}
+{#        <div class="col-sm-12">#}
+{#        <input class="btn btn-primary" type="submit" value="Додати" name="add_button">#}
+{#        <button class="btn btn-link" type="submit" name="cancel_button" value="Скасувати">Скасувати</button>#}
+{#        </div>#}
+{#    </div>#}
+{#</form>#}
+{% endblock content %}

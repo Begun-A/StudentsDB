@@ -1,45 +1,83 @@
-{% extends 'students/base.html' %}
-{% block meta-title %}Відвідування{% endblock meta-title %}
-{% block title %}Облік відвідування{% endblock title %}
+{% extends "students/base.html" %}
 
-<!--Mounts button-->
+{% load static from staticfiles %}
+
+{% block meta_title %}Облік Відвідування{% endblock meta_title %}
+
+{% block title %}Облік Відвідування{% endblock title %}
 
 {% block content %}
-<!--Start Journal List-->
-<table class="table table-hover table-striped table-bordered">
-    <caption><a>&larr;</a>Жовтень <a>&rarr;</a></caption>
-    <thead>
-    <tr>
-        <th rowspan="2">№</th>
-        <th rowspan="2">Студент</th>
-        <th>Ср <br/>1</th>
-        <th>Чт <br/>2</th>
-    </tr>
-    <tr>
+    {% if not students %}
+        <div>
+            Поки немає жождного студента в базі. Будь-ласка
+            <a href={% url "students_add" %}> додайте</a> першого
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            Зміни в журнал зберігаються автоматично при кожному кліку в клітинці
+            таблиці.
+            <span id="ajax-progres-indicator">Йде збереження...</span>
+        </div>
+        <p id="journal-nav" class="text-center">
+            <a href="?month={{ prev_month }}"
+               title="Попередній місяць">&larr;</a>
+            <!--TODO: translate month name -->
+            <strong>{{ month_verbose }} {{ year }}</strong>
+            <a href="?moth={{ next_month }}" title="Наступній місяць">&rarr;</a>
+        </p>
+        <table class="table table-striped table-hover table-bordered"
+               id="srudents-journal">
+            <thead>
+            <tr>
+                <th class="num">#</th>
+                <th class="name">Студент</th>
+                {% for day in month_header %}
+                    <th class="day_header">
+                        <!-- TODO: translate month name -->
+                        {{ day.verbose }}
+                        <br/>
+                        {{ day.day }}
+                    </th>
+                {% endfor %}
+            </tr>
+            </thead>
 
-    </tr>
-    </thead>
-    <tbody>
-     <tr>
-         <td>1</td>
-         <td><a href="#"> Stallone Silvestr </a></td>
-         <!--Multiply using templates -->
-         <td>
-             <form method="POST" action="">
-                 <input type="checkbox">
-             </form>
-         </td>
-         <td>
-             <form method="POST" action="">
-                 <input type="checkbox">
-             </form>
-         </td>
-     </tr>
+            <tbody>
+            {% csrf_token %}
+            {% for student in students %}
+                <tr>
+                    <td>
+                        {% if is_paginated %}
+                            {{ page_obj.start_index|add:forloop.counter|add:"-1" }}
+                        {% else %}
+                            {{ forloop.counter }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a title="Редагувати" target="_blank"
+                           href="{% url 'journal' student.id %}">
+                            {{ student.fullname }}
+                        </a>
+                    </td>
+                    {% for day in student.days %}
+                        <td class="day-box">
+                            <input type="checkbox"
+                                   data-student-id="{{ student.id }}"
+                                   data-date="{{ day.date }}"
+                                   data-url="{{ student.update_url }}" value="1"
+                                    {% if day.present %}
+                                   checked="checked" {% endif %}>
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {% with object_list=students %}
+            {% include "students/pagination.html" %}
+        {% endwith %}
 
 
-    </tbody>
-</table>
-<!--End Journal List-->
-
-
-{% endblock content %}
+    {% endif %}
+{% endblock %}

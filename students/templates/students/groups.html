@@ -15,8 +15,7 @@
                         &uarr;
                     {% elif order_by == 'id' and reverse == '1' %}
                         &darr;
-                    {% endif %}</a></th>
-                    </a>
+                    {% endif %}</a>
                 </th>
                 <th>
                     <a href="{% url 'groups_list' %}?order_by=title{% if order_by == 'title' and reverse != '1' %}&amp;reverse=1{% endif %}">Назва
@@ -24,9 +23,7 @@
                         &uarr;
                     {% elif order_by == 'title' and reverse == '1' %}
                         &darr;
-                    {% endif %}</a></th>
-
-                    </a>
+                    {% endif %}</a>
                 </th>
                 <th>
                     <a href="{% url 'groups_list' %}?order_by=leader{% if order_by == 'leader' and reverse != '1' %}&amp;reverse=1{% endif %}">Староста
@@ -34,8 +31,7 @@
                         &uarr;
                     {% elif order_by == 'leader' and reverse == '1' %}
                         &darr;
-                    {% endif %}</a></th>
-                    </a>
+                    {% endif %}</a>
                 </th>
                 <th>Дії</th>
             </tr>
@@ -44,9 +40,15 @@
         <tbody>
         {% for group in groups %}
             <tr>
-                <td>{{ forloop.counter }}</td>
+                <td>
+                    {% if is_paginated %}
+                        {{ page_obj.start_index|add:forloop.counter|add:"-1" }}
+                    {% else %}
+                        {{ forloop.counter }}
+                    {% endif %}
+                </td>
                 <td><a href="{% url "home" %}?group={{ group.id }}">{{ group.title }}</a></td>
-                <td><a title="Редагувати" herf="#">{{ group.leader }}</a></td>
+                <td>{{ group.leader }}</td>
                 <td>
                     <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle"
@@ -55,9 +57,9 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li role="presentation"><a role="menuitem"
+                            <li role="presentation" value="{{ group.id }}" class="group-present"><a role="menuitem"
                                                        tabindex="-1"
-                                                       href="#">Відвідування</a>
+                                                       href="{% url 'journal' %}">Відвідування</a>
                             </li>
                             <li role="presentation"><a role="menuitem"
                                                        tabindex="-1"
@@ -74,6 +76,9 @@
         {% endfor %}
         </tbody>
     </table>
+    {% with object_list=students %}
+            {% include "students/pagination.html" %}
+        {% endwith %}
     {% include 'students/pagination.html' %}
     <!--End Groups List-->
 {% endblock content %}

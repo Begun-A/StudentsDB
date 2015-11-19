@@ -37,3 +37,12 @@ caption{
 input, textarea, select{
     max-width: 300px;
 }
+td.day-header, th.day-box{
+    padding: 4px !important;
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+#ajax-progres-indicator{
+    display: none;
+}

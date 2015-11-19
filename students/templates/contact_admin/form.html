@@ -1,0 +1,21 @@
+{% extends 'students/base.html' %}
+{% load crispy_forms_tags %}
+{% load static from staticfiles %}
+
+
+{% block meta-title %}Зв'язок із Адміністратором{% endblock meta-title %}
+
+{% block alert %}
+    <!--Status Message-->
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning" role="alert">{{message}}</div>
+    {% endfor %}
+    {% endif %}
+{% endblock alert %}
+
+{% block title %}Зв'язок із Адміністратором{% endblock title %}
+
+{% block content %}
+{% crispy form %}
+{% endblock %}
